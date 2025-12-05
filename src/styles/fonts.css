@@ -1,0 +1,87 @@
+/**
+ * ------------------------------------------------------
+ *  FONT IMPORTS
+ * ------------------------------------------------------
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+ 
+/**
+ * ------------------------------------------------------
+ *  TYPOGRAPHY UTILITIES
+ * ------------------------------------------------------
+ */
+
+/* Base Body Text (18px) */
+body,
+.text-size-base {
+    @apply font-primary text-text text-body 2xl_down:text-xs sm_down:text-xxs;
+}
+
+/* XL (24px) */
+.extra-large,
+.text-size-xl {
+    @apply font-primary text-text text-xl 2xl_down:text-lg sm_down:text-sm;
+}
+
+/* Large (20px) */
+.large,
+.text-size-lg {
+    @apply font-primary text-text text-lg 2xl_down:text-sm sm_down:text-xs;
+}
+
+/* Small (16px) */
+.small,
+.text-size-sm {
+    @apply font-primary text-text text-sm 2xl_down:text-xxs sm_down:text-3xs;
+}
+
+/* Extra Small (14px) */
+.extra-small,
+.text-size-xs {
+    @apply font-primary text-text text-xs 2xl_down:text-[10px] sm_down:text-4xs;
+}
+
+/**
+ * ------------------------------------------------------
+ *  TITLES / HEADINGS
+ * ------------------------------------------------------
+ */
+
+.title-1 {
+    @apply font-primary text-title text-heading-1 2xl_down:text-heading-2 sm_down:text-heading-4 !leading-[110%];
+}
+
+.title-2 {
+    @apply font-primary text-title text-heading-2 2xl_down:text-heading-3 sm_down:text-heading-5;
+}
+
+.title-3 {
+    @apply font-primary text-title text-heading-3 2xl_down:text-heading-4 sm_down:text-heading-6;
+}
+
+.title-4 {
+    @apply font-primary text-title text-heading-4 2xl_down:text-heading-5 sm_down:text-heading-7;
+}
+
+.title-5 {
+    @apply font-primary text-title text-heading-5 2xl_down:text-heading-6 sm_down:text-heading-8;
+}
+
+.title-6 {
+    @apply font-primary text-title text-heading-6 2xl_down:text-heading-7 sm_down:text-heading-9 leading-[160%];
+}
+
+.title-7 {
+    @apply font-primary text-title text-heading-7 2xl_down:text-heading-8 sm_down:text-heading-9;
+}
+
+/**
+ * ------------------------------------------------------
+ *  SUBTITLE
+ * ------------------------------------------------------
+ */
+
+.subtitle {
+    @apply font-primary text-color-10 uppercase text-outlined 2xl_down:text-xs sm_down:text-xxs;
+}

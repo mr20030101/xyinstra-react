@@ -1,0 +1,1 @@
+export default function SummaryCard({label,value}){return <div>{label}: {value}</div>;}
