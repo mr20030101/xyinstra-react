@@ -42,6 +42,10 @@ body,
     @apply font-primary text-text text-xs 2xl_down:text-[10px] sm_down:text-4xs;
 }
 
+.text-size-xxs {
+    @apply font-primary text-text text-xxs;
+}
+
 /**
  * ------------------------------------------------------
  *  TITLES / HEADINGS
