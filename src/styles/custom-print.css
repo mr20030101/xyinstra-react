@@ -1,47 +1,40 @@
 @media print {
   @page {
     size: A4 landscape;
-    margin: 5mm; /* adjust if needed */
+    margin: 5mm;
   }
 
-  html, body {
-    width: 100%;
-    height: auto;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  .print-columns-3 {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 1rem !important;
-    width: 100% !important;
-  }
-
-  .print-column {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
-  
-  
-  /* Each page container */
-  .print-page {
-    height: 190mm;
-    /* 210mm minus margins */
-    page-break-after: always;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  /* Remove extra margin/padding */
+  html,
   body {
     margin: 0;
     padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print-page {
+    width: 287mm;
+    /* 297 - (5mm x 2) */
+    height: 200mm;
+    /* 210 - (5mm x 2) */
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .print-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .print-column {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 }
-

@@ -1,6 +1,6 @@
 export default function StaffReplacementCosts() {
     return (
-        <div className="">
+        <div className="text-sm">
 
             {/* TITLE */}
             <div className="text-center text-lg font-semibold mb-4">

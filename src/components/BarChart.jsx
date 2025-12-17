@@ -167,8 +167,8 @@ export default function BarChart() {
 
 
     return (
-        <div className="w-full h-[620px] max-w-[1440px] mx-auto print:scale-90">
-            <canvas className="object-contain" ref={canvasRef}></canvas>
+        <div className="w-full h-[620px] max-w-[1440px] mx-auto">
+            <canvas ref={canvasRef}></canvas>
         </div>
     );
 }
