@@ -66,12 +66,34 @@ export default function PieChart() {
                     <div key={idx} className="flex flex-col items-center">
 
                         {/* VALUE + PERCENT BADGE */}
-                        <div
-                            className="px-3 py-1 rounded-lg text-white font-semibold text-sm"
-                            style={{ backgroundColor: item.color }}
+                        <svg
+                            width="110"
+                            height="26"
+                            viewBox="0 0 110 26"
+                            xmlns="http://www.w3.org/2000/svg"
+                            style={{ display: "block" }}
                         >
-                            {item.value} ({item.percent}%)
-                        </div>
+                            <rect
+                                x="0"
+                                y="0"
+                                width="110"
+                                height="26"
+                                rx="8"
+                                fill={item.color}
+                            />
+                            <text
+                                x="55"
+                                y="18"
+                                textAnchor="middle"
+                                fill="#ffffff"
+                                fontSize="14"
+                                fontWeight="600"
+                                style={{ fontFamily: "inherit" }}
+                            >
+                                {item.value} ({item.percent}%)
+                            </text>
+                        </svg>
+
 
                         {/* LABEL */}
                         <div className="mt-1 text-gray-700 text-sm">

@@ -43,10 +43,10 @@ export default function SummaryLayout() {
         <div ref={reportRef} className="bg-white">
 
             {/* PAGE 1 */}
-            <div className="print-page mx-auto max-w-[1440px] p-6">
+            <div className="print-page mx-auto max-w-[1440px] h-[210mm] p-6">
                 <ReportHeader />
 
-                <div className="text-center mt-4 mb-6">
+                <div className="text-center mt-4 mb-12">
                     <h2 className="text-2xl font-medium">
                         Estimated Risk | Cost Centre Loss
                     </h2>
@@ -56,7 +56,7 @@ export default function SummaryLayout() {
                     </div>
                 </div>
 
-                <div className="mt-10 grid grid-cols-3 gap-3">
+                <div className="mt-5 grid grid-cols-3 gap-3">
                     <div className="p-4 border rounded-xl flex items-center justify-between">
                         <div className="flex flex-col items-center">
                             NPS
@@ -82,7 +82,7 @@ export default function SummaryLayout() {
             </div>
 
             {/* PAGE 2 */}
-            <div className="print-page mx-auto max-w-[1440px] p-6">
+            <div className="print-page mx-auto max-w-[1440px] h-[210mm] p-6">
                 <ReportHeader />
 
                 <div className="text-center mt-2 mb-6">
@@ -96,7 +96,7 @@ export default function SummaryLayout() {
             </div>
 
             {/* PAGE 3 */}
-            <div className="print-page mx-auto max-w-[1440px] p-6">
+            <div className="print-page mx-auto max-w-[1440px] h-[210mm] p-6">
                 <ReportHeader />
 
                 <div className="text-center mt-2 mb-6">

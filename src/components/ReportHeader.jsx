@@ -2,7 +2,7 @@ export default function RiskSummary() {
     return (
         <>
             {/* Report Header */}
-            <div className="grid gap-2  p-4 font-sans text-black">
+            <div className="grid font-sans text-black">
 
                 {/* Row 1 */}
                 <div className="grid grid-cols-12 items-center">
@@ -20,7 +20,7 @@ export default function RiskSummary() {
                 {/* Row 2 */}
                 <div className="grid grid-cols-[1fr_auto] items-center border-b-2 border-red-800 pb-1.5">
                     <div className="text-2xl font-semibold">
-                        : ABC Group - LEADERSHIP EFFECTIVENESS - Review
+                        ABC Group - LEADERSHIP EFFECTIVENESS - Review
                     </div>
 
                     <div className="text-2xl font-semibold">
@@ -34,24 +34,27 @@ export default function RiskSummary() {
                         Review Totals - ALL LEVELS
                     </div>
 
-                    <div className="grid grid-flow-col items-center gap-2 text-sm">
-                        <span>Review Total: Completed:</span>
+                    <div className="flex justify-between gap-2 items-center">
+                        <span className="font-bold">Review Total: </span>
 
-                        <span className="inline-block min-w-[36px] h-[22px] 
-                     rounded-full bg-green-600 
-                     text-[11px] font-semibold text-white 
-                     leading-[22px] text-center">
-                            321
-                        </span>
+                        <span className="">Completed: </span>
 
-                        <span>Pending:</span>
+                        <svg width="36" height="26">
+                            <rect width="36" height="26" rx="6" fill="#16a34a" />
+                            <text x="18" y="18" textAnchor="middle" fill="#fff" fontSize="13" fontWeight="600">
+                                321
+                            </text>
+                        </svg>
 
-                        <span className="inline-block min-w-[36px] h-[22px] 
-                     rounded-full bg-yellow-400 
-                     text-[11px] font-semibold text-black 
-                     leading-[22px] text-center">
-                            16
-                        </span>
+
+                        <span className="">Pending:</span>
+
+                        <svg width="36" height="26">
+                            <rect width="36" height="26" rx="6" fill="#16a34a" />
+                            <text x="18" y="18" textAnchor="middle" fill="#fff" fontSize="13" fontWeight="600">
+                                16
+                            </text>
+                        </svg>
                     </div>
 
                 </div>

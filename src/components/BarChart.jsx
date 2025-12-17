@@ -167,7 +167,7 @@ export default function BarChart() {
 
 
     return (
-        <div className="w-full h-[620px] max-w-[1440px] mx-auto">
+        <div className="w-full h-[720px] max-w-[1440px] mx-auto">
             <canvas ref={canvasRef}></canvas>
         </div>
     );

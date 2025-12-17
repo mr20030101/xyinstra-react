@@ -64,14 +64,34 @@ export default function RiskSummary() {
                         <div className="text-xxs mt-1">
                             Lost Productivity Cost:
                         </div>
-
-                        {/* COST BADGE */}
-                        <div
-                            className="mt-1 px-3 py-1 rounded-md text-white font-semibold text-[10px] print:scale-80"
-                            style={{ backgroundColor: item.costBg }}
+ 
+                        {/* COST BADGE (SVG) */}
+                        <svg
+                            width="80"
+                            height="25"
+                            viewBox="0 0 80 20"
+                            xmlns="http://www.w3.org/2000/svg"
                         >
-                            {item.cost}
-                        </div>
+                            <rect
+                                x="0"
+                                y="0"
+                                width="80"
+                                height="25"
+                                rx="4"
+                                fill={item.costBg}
+                            />
+                            <text
+                                x="40"
+                                y="14"
+                                textAnchor="middle"
+                                fill="#ffffff"
+                                fontSize="12"
+                                fontWeight="600"
+                                style={{ fontFamily: "inherit" }}
+                            >
+                                {item.cost}
+                            </text>
+                        </svg>
                     </div>
                 ))}
             </div>
