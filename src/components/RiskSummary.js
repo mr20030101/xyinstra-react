@@ -46,14 +46,14 @@ export default function RiskSummary() {
 
                         {/* CIRCLE */}
                         <div
-                            className="w-28 h-28 rounded-full flex flex-col items-center justify-center border-4"
+                            className="w-20 h-20 rounded-full flex flex-col items-center justify-center border-4"
                             style={{ borderColor: item.color }}
                         >
-                            <div className="text-xl font-semibold text-gray-700">
+                            <div className="text-xs font-semibold text-gray-700">
                                 {item.percent}%
                             </div>
 
-                            <div className="text-lg font-bold" style={{ color: item.color }}>
+                            <div className="font-bold text-xs" style={{ color: item.color }}>
                                 {item.count}
                             </div>
                         </div>
@@ -61,13 +61,13 @@ export default function RiskSummary() {
                         
 
                         {/* COST LABEL */}
-                        <div className="text-size-xxs mt-1">
+                        <div className="text-xxs mt-1">
                             Lost Productivity Cost:
                         </div>
 
                         {/* COST BADGE */}
                         <div
-                            className="mt-1 px-3 py-1 rounded-md text-white font-semibold text-sm"
+                            className="mt-1 px-3 py-1 rounded-md text-white font-semibold text-[10px] print:scale-80"
                             style={{ backgroundColor: item.costBg }}
                         >
                             {item.cost}

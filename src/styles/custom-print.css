@@ -27,4 +27,21 @@
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
+  
+  
+  /* Each page container */
+  .print-page {
+    height: 190mm;
+    /* 210mm minus margins */
+    page-break-after: always;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Remove extra margin/padding */
+  body {
+    margin: 0;
+    padding: 0;
+  }
 }
+

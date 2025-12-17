@@ -1,81 +1,40 @@
-import { useEffect, useState } from "react";
-import { BrowserRouter } from "react-router";
-import axios from "axios"; 
+import { useEffect, useRef } from "react"; 
+import html2pdf from "html2pdf.js";
 import PieChart from "./components/PieChart";
 import RiskSummary from "./components/RiskSummary";
 import StaffReplacementCosts from "./components/StaffReplacementCosts";
-import DualBarChart from "./components/DualBarChart";
+import BarChart from "./components/BarChart";
+import ReportHeader from "./components/ReportHeader";
 
  
 export default function SummaryLayout() {
 
+    const reportRef = useRef(null);
+
+    useEffect(() => {
+        // AUTO GENERATE PDF AFTER EVERYTHING IS LOADED
+        setTimeout(() => {
+            if (reportRef.current) {
+                const opt = {
+                    margin: 0,
+                    filename: 'summary-report.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 4 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+                };
+
+                html2pdf().from(reportRef.current).set(opt).save();
+            }
+        }, 1500); // wait for charts & layout
+    }, []);
+
     return (
-        <div className="min-h-screen bg-white p-6">
+        <div ref={reportRef} className="min-h-screen bg-white p-6">
 
             {/* PAGE 1 START */}
-            <div className="mx-auto max-w-[1400px]">
+            <div className="print-page mx-auto max-w-[1440px]">
 
-                {/* Header row */}
-                <div className="flex items-center justify-between mb-2">
-                    <div className="w-1/3"></div>
-
-                    <div className="w-1/3 text-center">
-                        <span className="title-6">Review Summary Report - [LEADERSHIP]</span>
-                    </div>
-
-                    <div className="w-1/3 text-right">
-                        <div className="text-xs">
-                            Printed: 12/07/2025
-                        </div>
-                    </div>
-                </div>
-
-                {/* Sub header */}
-                <div className="flex items-start justify-between border-b-2 pb-4 border-primary my-4">
-                    <div className="w-1/3">
-                        <span className="title-7">Leadership - Review</span>
-                    </div>
-
-                    <div className="w-1/3 text-right">
-                        <div className="text-xs title-7">Risk Cost Centre Report</div>
-                    </div>
-                </div>
-
-                {/* Totals */}
-                <div className="flex items-start justify-between my-4">
-                    <div className="w-1/3">
-                        <span className="title-7">Review Totals - [Levels]</span>
-                    </div>
-
-                    <div className="w-1/3 justify-end items-center flex gap-2">
-                        <span className="large font-bold">Review Total:</span>
-
-                        <div>
-                            <span>Completed: </span>
-                            <span className="px-4 py-2 bg-success rounded-xl text-white font-bold">
-                                120
-                            </span>
-                        </div>
-
-                        <div>
-                            <span>Pending: </span>
-                            <span className="px-4 py-2 bg-warning rounded-xl text-white font-bold">
-                                8
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Risk Level */}
-                <div className="flex items-start justify-end my-4">
-                    <div className="w-1/3 justify-end items-center flex gap-2">
-                        <span className="large font-bold">Risk Level:</span>
-
-                        <div className="text-danger">
-                            <span>High</span>
-                        </div>
-                    </div>
-                </div>
+                <ReportHeader />
 
                 {/* Estimated Risk Cost */}
                 <div className="text-center mt-4 mb-6">
@@ -123,30 +82,47 @@ export default function SummaryLayout() {
             </div>
 
             {/* PAGE 2 START */}
-            <div className="mx-auto max-w-[1400px] mt-10">
+            <div className="print-page mx-auto max-w-[1440px] mt-10 pt-10">
 
-                {/* Header row */}
-                <div className="flex items-center justify-between mb-2">
-                    <div className="w-1/3"></div>
-
-                    <div className="w-1/3 text-center">
-                        <span className="title-6">Review Summary Report - [LEADERSHIP]</span>
-                    </div>
-
-                    <div className="w-1/3 text-right">
-                        <div className="text-xs">
-                            Printed: 12/07/2025
-                        </div>
-                    </div>
-                </div>
+                {/* <ReportHeader /> */}
 
                 {/* PLACEHOLDER FOR PAGE 2 CONTENT */}
-                <div className="mt-10 p-10 border rounded-xl">
+                <div className="">
+                    {/* Estimated Risk Cost */}
+                    <div className="text-center mt-4 mb-6">
+                        <h2 className="text-2xl font-medium">Top 10 Criteria</h2> 
+                    </div>
                     <div className="text-center text-gray-400">
-                       <div className="grid grid-cols-2 gap-6">
+                       <div className="grid grid-cols-2">
                             <div>
-                                <DualBarChart />
-                            </div>
+                                <BarChart />
+                            </div> 
+                            <div>
+                                <BarChart />
+                            </div> 
+                       </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* PAGE 3 START */}
+            <div className="print-page mx-auto max-w-[1440px] mt-10 pt-10">
+
+                {/* <ReportHeader /> */}
+
+                {/* PLACEHOLDER FOR PAGE 2 CONTENT */}
+                <div className="">
+                    <div className="text-center mt-4 mb-6">
+                        <h2 className="text-2xl font-medium">Top 10 UNFULFILLED Criteria</h2>
+                    </div>
+                    <div className="text-center text-gray-400">
+                       <div className="grid grid-cols-2">
+                            <div>
+                                <BarChart />
+                            </div> 
+                            <div>
+                                <BarChart />
+                            </div> 
                        </div>
                     </div>
                 </div>
