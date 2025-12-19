@@ -9,7 +9,7 @@ import {
     Legend
 } from "chart.js";
 
-// Register chart types
+// Register STATIC chart components once
 Chart.register(
     BarController,
     BarElement,
@@ -19,35 +19,38 @@ Chart.register(
     Legend
 );
 
-export default function BarChart() {
+export default function BarChart({
+    labels = [],
+    fulfilled = [],
+    unfulfilled = [],
+    testTaken = 0
+}) {
     const canvasRef = useRef(null);
 
     useEffect(() => {
+        if (!labels.length || !testTaken) return;
+
         const ctx = canvasRef.current.getContext("2d");
 
-        const labels = [
-            "OPEN & HONEST COMMUNICATION",
-            "FEEDBACK",
-            "AUTONOMY",
-            "RESPECTFUL",
-            "DEPENDABILITY",
-        ];
-
-        const fulfilled = [216, 212, 192, 146, 141];
-        const unfulfilled = [101, 103, 88, 53, 45];
-
-        // Compute percentages
+        /* ===============================
+           LEGACY PERCENTAGE LOGIC
+        =============================== */
         const percentages = fulfilled.map((f, i) => {
-            const u = unfulfilled[i];
-            const total = f + u;
+            const u = unfulfilled[i] ?? 0;
+
             return {
-                fulfilled: Math.round((f / total) * 100),
-                unfulfilled: Math.round((u / total) * 100),
+                // Blue bar
+                fulfilled: Math.round((f / testTaken) * 100),
+
+                // Red bar
+                unfulfilled: f > 0 ? Math.round((u / f) * 100) : 0
             };
         });
 
-        // ✅ Plugin: value + percentage inside bars
-        const BarLabelsPlugin = {
+        /* ===============================
+           LOCAL PLUGINS (IMPORTANT)
+        =============================== */
+        const barLabelsPlugin = {
             id: "barLabels",
             afterDraw(chart) {
                 const { ctx, scales } = chart;
@@ -75,23 +78,21 @@ export default function BarChart() {
                         ctx.fillStyle = "#fff";
                         ctx.textAlign = "center";
                         ctx.textBaseline = "middle";
-
                         ctx.fillText(`${value} (${percent}%)`, centerX, bar.y);
                         ctx.restore();
                     });
                 });
-            },
+            }
         };
 
-        // ✅ Plugin: category labels ABOVE bars
-        const CategoryAboveBarPlugin = {
+        const categoryAboveBarPlugin = {
             id: "categoryAboveBar",
             afterDraw(chart) {
                 const { ctx, chartArea } = chart;
 
                 ctx.save();
-                ctx.font = "bold 12px Arial";
-                ctx.fillStyle = "#666";
+                ctx.font = "bold 14px Arial";
+                ctx.fillStyle = "#000";
                 ctx.textAlign = "left";
                 ctx.textBaseline = "bottom";
 
@@ -99,8 +100,7 @@ export default function BarChart() {
                     const bar = chart.getDatasetMeta(0).data[index];
                     if (!bar) return;
 
-                    const SPACING = 6; // ✅ increase this for more gap
-
+                    const SPACING = 6;
                     const x = chartArea.left;
                     const y = bar.y - bar.height / 2 - SPACING;
 
@@ -108,12 +108,12 @@ export default function BarChart() {
                 });
 
                 ctx.restore();
-            },
+            }
         };
 
-
-        Chart.register(BarLabelsPlugin, CategoryAboveBarPlugin);
-
+        /* ===============================
+           CHART INSTANCE
+        =============================== */
         const chart = new Chart(ctx, {
             type: "bar",
             data: {
@@ -123,28 +123,26 @@ export default function BarChart() {
                         label: "Selected Criteria",
                         data: fulfilled,
                         backgroundColor: "#6A8599",
-                        barThickness: 44,
+                        barThickness: 44
                     },
                     {
                         label: "Unfulfilled",
                         data: unfulfilled,
                         backgroundColor: "#8B1C1C",
-                        barThickness: 44,
-                    },
-                ],
+                        barThickness: 44
+                    }
+                ]
             },
             options: {
                 indexAxis: "y",
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    x: {
-                        grid: { display: false },
-                    },
+                    x: { grid: { display: false } },
                     y: {
                         grid: { display: false },
-                        ticks: { display: false }, // ✅ hide left labels
-                    },
+                        ticks: { display: false }
+                    }
                 },
                 plugins: {
                     legend: {
@@ -152,23 +150,21 @@ export default function BarChart() {
                         labels: {
                             usePointStyle: true,
                             pointStyle: "circle",
-                            padding: 20,
-                        },
+                            padding: 20
+                        }
                     },
-                    tooltip: {
-                        enabled: true,
-                    },
-                },
+                    tooltip: { enabled: true }
+                }
             },
+            plugins: [barLabelsPlugin, categoryAboveBarPlugin]
         });
 
         return () => chart.destroy();
-    }, []);
-
+    }, [labels, fulfilled, unfulfilled, testTaken]);
 
     return (
         <div className="w-full h-[720px] max-w-[1440px] mx-auto">
-            <canvas ref={canvasRef}></canvas>
+            <canvas ref={canvasRef} />
         </div>
     );
 }

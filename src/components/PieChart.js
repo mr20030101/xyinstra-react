@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Chart } from "chart.js/auto";
+import CountBadge from "../components/CountBadge";
 
 export default function PieChart({
     not_at_risk = 0,
@@ -75,26 +76,20 @@ export default function PieChart({
 
     return (
         <div className="mx-auto">
-            <div className="w-[200px] h-[200px] mx-auto">
+            <div className="w-[150px] h-[150px] mx-auto">
                 <canvas ref={canvasRef} />
             </div>
 
             <div className="mt-4 grid grid-cols-2 gap-4 text-center">
                 {legendItems.map((item, idx) => (
                     <div key={idx} className="flex flex-col items-center">
-                        <svg width="110" height="26">
-                            <rect width="110" height="26" rx="8" fill={item.color} />
-                            <text
-                                x="55"
-                                y="18"
-                                textAnchor="middle"
-                                fill="#fff"
-                                fontSize="14"
-                                fontWeight="600"
-                            >
-                                {item.value} ({item.percent}%)
-                            </text>
-                        </svg>
+                     
+
+                        <CountBadge
+                            bgColor={item.color}
+                            width={70} 
+                            value={`${item.value} (${item.percent}%)`}
+                        />
 
                         <div className="mt-1 text-gray-700 text-sm">
                             {item.label}

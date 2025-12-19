@@ -38,7 +38,7 @@ export default function StaffReplacementCosts({
         });
 
     return (
-        <div className="text-sm border border-red-600 rounded-xl p-4">
+        <div className="">
 
             {/* TITLE */}
             <div className="text-center text-lg font-semibold mb-3">
