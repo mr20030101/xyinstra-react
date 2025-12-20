@@ -64,7 +64,7 @@ export default function StaffReplacementCosts({
 
                 <div className="flex justify-between font-semibold">
                     <span>Staff at T/O Rate:</span> 
-                    <span>{SATOR}</span>
+                    <span>{formatMoney(SATOR)}</span>
                 </div>
 
                 <div className="flex justify-between font-semibold">

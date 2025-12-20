@@ -37,9 +37,12 @@ export default function SummaryLayout() {
         async function fetchReport() {
             try {
                 const rcode = new URLSearchParams(window.location.search).get("rcode");
+                const type = new URLSearchParams(window.location.search).get("type");
+                const filter1 = new URLSearchParams(window.location.search).get("filter1");
+                const filter2 = new URLSearchParams(window.location.search).get("filter2");
 
                 const res = await fetch(
-                    `${API_BASE_URL}/reports/result-summary-report?rcode=${rcode}&type=baseline`,
+                    `${API_BASE_URL}/reports/result-summary-report?rcode=${rcode}&type=${type}&filter1=${filter1}&filter2=${filter2}`,
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -63,44 +66,44 @@ export default function SummaryLayout() {
     /* =============================
        PDF GENERATION
     ============================= */
-    useEffect(() => {
-        setTimeout(() => {
-            if (!reportRef.current) return;
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         if (!reportRef.current) return;
 
-            const printPage = reportRef.current.querySelector(".print-page");
-            const originalHeight = printPage?.style.height;
+    //         const printPage = reportRef.current.querySelector(".print-page");
+    //         const originalHeight = printPage?.style.height;
 
-            if (printPage) {
-                printPage.style.height = "210mm";
-            }
+    //         if (printPage) {
+    //             printPage.style.height = "210mm";
+    //         }
 
-            const opt = {
-                margin: 0,
-                filename: "summary-report.pdf",
-                image: { type: "jpeg", quality: 0.98 },
-                html2canvas: {
-                    scale: 2,
-                    useCORS: true
-                },
-                jsPDF: {
-                    unit: "mm",
-                    format: "a4",
-                    orientation: "landscape"
-                }
-            };
+    //         const opt = {
+    //             margin: 0,
+    //             filename: "summary-report.pdf",
+    //             image: { type: "jpeg", quality: 0.98 },
+    //             html2canvas: {
+    //                 scale: 2,
+    //                 useCORS: true
+    //             },
+    //             jsPDF: {
+    //                 unit: "mm",
+    //                 format: "a4",
+    //                 orientation: "landscape"
+    //             }
+    //         };
 
-            html2pdf()
-                .from(reportRef.current)
-                .set(opt)
-                .outputPdf("bloburl")
-                .then((pdfUrl) => {
-                    if (printPage) {
-                        printPage.style.height = originalHeight || "";
-                    }
-                    window.open(pdfUrl, "_blank");
-                });
-        }, 2000);
-    }, []);
+    //         html2pdf()
+    //             .from(reportRef.current)
+    //             .set(opt)
+    //             .outputPdf("bloburl")
+    //             .then((pdfUrl) => {
+    //                 if (printPage) {
+    //                     printPage.style.height = originalHeight || "";
+    //                 }
+    //                 window.open(pdfUrl, "_blank");
+    //             });
+    //     }, 2000);
+    // }, []);
 
     /* =============================
        LOADING / SAFETY
@@ -115,7 +118,9 @@ export default function SummaryLayout() {
         report_date,
         review_title,
         review_test_taken,
-        review_test_pending
+        review_test_pending,
+        review_level,
+        risk_level,
     } = header;
 
     const summary = data?.data?.companysummary ?? {};
@@ -188,7 +193,8 @@ export default function SummaryLayout() {
                     reviewType={review_title}
                     completed={review_test_taken}
                     pending={review_test_pending}
-                    riskLevel="High"
+                    reviewLevel={review_level}
+                    riskLevel={risk_level}
                 />
 
                 <div className="text-center mt-4 mb-12">
@@ -282,7 +288,8 @@ export default function SummaryLayout() {
                     reviewType={review_title}
                     completed={review_test_taken}
                     pending={review_test_pending}
-                    riskLevel="High"
+                    reviewLevel={review_level}
+                    riskLevel={risk_level}
                 />
 
                 <div className="text-center mt-2 mb-6">
@@ -305,7 +312,8 @@ export default function SummaryLayout() {
                     reviewType={review_title}
                     completed={review_test_taken}
                     pending={review_test_pending}
-                    riskLevel="High"
+                    reviewLevel={review_level}
+                    riskLevel={risk_level}
                 />
 
                 <div className="text-center mt-2 mb-6">

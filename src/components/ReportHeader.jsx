@@ -7,10 +7,11 @@ export default function ReportHeader({
     reviewType,
     completed = 0,
     pending = 0,
-    riskLevel = "High"
+    reviewLevel,
+    riskLevel
 }) {
     return (
-        <div className="grid font-sans text-black">
+        <div className="grid font-sans text-black uppercase">
 
             {/* Row 1 */}
             <div className="grid grid-cols-12 items-center">
@@ -21,7 +22,7 @@ export default function ReportHeader({
 
                 {/* Right aligned date */}
                 <div className="col-span-2 col-start-11 text-sm whitespace-nowrap justify-self-end">
-                    Printed: {printedDate}
+                    {printedDate}
                 </div>
             </div>
 
@@ -32,7 +33,7 @@ export default function ReportHeader({
                 </div>
 
                 <div className="text-2xl font-semibold">
-                    Risk Cost Centre Report:
+                    Risk Cost Centre Report
                 </div>
             </div>
 
@@ -43,18 +44,18 @@ export default function ReportHeader({
             {/* Row 3 */}
             <div className="grid grid-cols-[1fr_auto] items-center mt-1 leading-none">
                 <div className="text-2xl font-semibold">
-                    Review Totals - ALL LEVELS
+                    Review Totals - {reviewLevel}
                 </div>
 
                 <div className="flex text-2xl gap-2 items-center  ">
                     <span className="font-bold">Review Total:</span>
 
                     <span>
-                        Completed: <span className="font-extrabold text-3xl" style={{ color: "#16a34a" }}>{completed}</span>
+                        Completed: <span className="font-extrabold" style={{ color: "#16a34a" }}>{completed}</span>
                     </span>
 
                     <span>
-                        Pending: <span className="font-extrabold text-3xl" style={{ color: "#ffc107" }}>{pending}</span>
+                        Pending: <span className="font-extrabold" style={{ color: "#ffc107" }}>{pending}</span>
                     </span> 
                 </div>
             </div>
@@ -63,7 +64,7 @@ export default function ReportHeader({
             <div className="text-2xl font-semibold mt-1 text-right">
                 Risk Level:{" "}
                 <span
-                    className={`${riskLevel === "High" ? "text-red-600" : "text-green-600"} font-extrabold`}
+                    className={`${riskLevel === "Very High" || riskLevel === "High"  ? "text-red-600" : "text-green-600"} font-extrabold`}
                 >
                     {riskLevel}
                 </span>
