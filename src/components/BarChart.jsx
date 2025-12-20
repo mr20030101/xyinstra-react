@@ -74,11 +74,11 @@ export default function BarChart({
                         const centerX = (startX + endX) / 2;
 
                         ctx.save();
-                        ctx.font = "bold 12px Arial";
+                        ctx.font = "bold 14px Arial";
                         ctx.fillStyle = "#fff";
                         ctx.textAlign = "center";
                         ctx.textBaseline = "middle";
-                        ctx.fillText(`${value} (${percent}%)`, centerX, bar.y);
+                        ctx.fillText(`${value}     (${percent}%)`, centerX, bar.y);
                         ctx.restore();
                     });
                 });
@@ -154,6 +154,17 @@ export default function BarChart({
                         }
                     },
                     tooltip: { enabled: true }
+                },
+                scales: {
+                    x: {
+                        display: false,      // ⬅ removes 0–3 labels & axis line
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    },
                 }
             },
             plugins: [barLabelsPlugin, categoryAboveBarPlugin]

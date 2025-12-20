@@ -26,7 +26,7 @@ export default function ReportHeader({
             </div>
 
             {/* Row 2 */}
-            <div className="grid grid-cols-[1fr_auto] items-center border-b-2 border-red-800 pb-1.5">
+            <div className="grid grid-cols-[1fr_auto] items-center ">
                 <div className="text-2xl font-semibold">
                    {reviewType}
                 </div>
@@ -36,29 +36,38 @@ export default function ReportHeader({
                 </div>
             </div>
 
+            <div className="border-b-2 border-red-800 h-4">
+                &nbsp;
+            </div>
+
             {/* Row 3 */}
-            <div className="grid grid-cols-[1fr_auto] items-center mt-1">
+            <div className="grid grid-cols-[1fr_auto] items-center mt-1 leading-none">
                 <div className="text-2xl font-semibold">
                     Review Totals - ALL LEVELS
                 </div>
 
-                <div className="flex gap-2 items-center">
+                <div className="flex text-2xl gap-2 items-center  ">
                     <span className="font-bold">Review Total:</span>
 
-                    <span>Completed:</span>
-                    <CountBadge value={completed} />
+                    <span>
+                        Completed: <span className="font-extrabold text-3xl" style={{ color: "#16a34a" }}>{completed}</span>
+                    </span>
 
-                    <span>Pending:</span>
-                    <CountBadge value={pending} bgColor="#ffc107" />
+                    <span>
+                        Pending: <span className="font-extrabold text-3xl" style={{ color: "#ffc107" }}>{pending}</span>
+                    </span> 
                 </div>
             </div>
 
             {/* Risk Level */}
-            <div className="text-sm font-semibold mt-1 text-right">
+            <div className="text-2xl font-semibold mt-1 text-right">
                 Risk Level:{" "}
-                <span className={riskLevel === "High" ? "text-red-600" : "text-green-600"}>
+                <span
+                    className={`${riskLevel === "High" ? "text-red-600" : "text-green-600"} font-extrabold`}
+                >
                     {riskLevel}
                 </span>
+
             </div>
 
         </div>

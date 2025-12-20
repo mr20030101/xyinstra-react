@@ -1,4 +1,5 @@
 import CountBadge from "../components/CountBadge";
+import Ring from "../components/Ring";
 
 export default function RiskSummary({
     currency = "$",
@@ -74,42 +75,29 @@ export default function RiskSummary({
     return (
         <div className="text-center">
             <div className="text-lg font-semibold mb-4">
-                RCC Risk Summary Estimates:
+                Cost Centre Risk Summary Estimates:
             </div>
 
             <div className="grid grid-cols-3 gap-2">
                 {data.map((item, idx) => (
-                    <div key={idx} className="flex justify-between flex-col gap-3 items-center">
+                    <div key={idx} className="flex justify-evenly flex-col gap-3 items-center">
 
                         {/* LABEL */}
-                        <div className="mt-2 small" style={{ color: item.color }}>
+                        <div className="my-2 small h-9" style={{ color: item.color }}>
                             {item.label}:
                         </div>
 
-                        {/* CIRCLE */}
-                        <div
-                            className="w-20 h-20 rounded-full flex flex-col items-center justify-center border-4"
-                            style={{ borderColor: item.color }}
-                        >
-                            <div className=" font-semibold text-gray-700">
-                                {item.percent}%
-                            </div>
+                        <Ring percent={item.percent} count={item.count} color={item.color} />
 
-                            <div
-                                className="font-bold "
-                                style={{ color: item.color }}
-                            >
-                                {item.count}
-                            </div>
-                        </div>
 
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col items-center gap-2">
                             {/* COST LABEL */}
-                            <div className="text-xxs mt-1">
+                            <div className="text-xs mt-1" style={{ color: item.color }}>
                                 Lost Productivity Cost:
                             </div>
 
                             <CountBadge
+                                fontSize={16}
                                 bgColor={item.costBg}
                                 width={120}
                                 value={item.cost}

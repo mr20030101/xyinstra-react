@@ -22,9 +22,9 @@ export default function PieChart({
         const safe = toNumber(not_at_risk);
         const risk = toNumber(potentialriskemployees);
 
-        const labels = ["Not At Risk", "At Risk"];
-        const values = [safe, risk];
-        const colors = ["#617d8c", "#891a10"];
+        const labels = ["At Risk", "Not At Risk"];
+        const values = [risk, safe];
+        const colors = ["#891a10", "#617d8c"];
 
         const total = safe + risk;
 
