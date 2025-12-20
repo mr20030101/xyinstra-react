@@ -28,7 +28,7 @@ export default function SummaryLayout() {
         Number(value ?? 0).toLocaleString("en-US", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
-        });
+    });
 
     /* =============================
        FETCH API DATA
@@ -66,44 +66,44 @@ export default function SummaryLayout() {
     /* =============================
        PDF GENERATION
     ============================= */
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         if (!reportRef.current) return;
+    useEffect(() => {
+        setTimeout(() => {
+            if (!reportRef.current) return;
 
-    //         const printPage = reportRef.current.querySelector(".print-page");
-    //         const originalHeight = printPage?.style.height;
+            const printPage = reportRef.current.querySelector(".print-page");
+            const originalHeight = printPage?.style.height;
 
-    //         if (printPage) {
-    //             printPage.style.height = "210mm";
-    //         }
+            if (printPage) {
+                printPage.style.height = "210mm";
+            }
 
-    //         const opt = {
-    //             margin: 0,
-    //             filename: "summary-report.pdf",
-    //             image: { type: "jpeg", quality: 0.98 },
-    //             html2canvas: {
-    //                 scale: 2,
-    //                 useCORS: true
-    //             },
-    //             jsPDF: {
-    //                 unit: "mm",
-    //                 format: "a4",
-    //                 orientation: "landscape"
-    //             }
-    //         };
+            const opt = {
+                margin: 0,
+                filename: "summary-report.pdf",
+                image: { type: "jpeg", quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true
+                },
+                jsPDF: {
+                    unit: "mm",
+                    format: "a4",
+                    orientation: "landscape"
+                }
+            };
 
-    //         html2pdf()
-    //             .from(reportRef.current)
-    //             .set(opt)
-    //             .outputPdf("bloburl")
-    //             .then((pdfUrl) => {
-    //                 if (printPage) {
-    //                     printPage.style.height = originalHeight || "";
-    //                 }
-    //                 window.open(pdfUrl, "_blank");
-    //             });
-    //     }, 2000);
-    // }, []);
+            html2pdf()
+                .from(reportRef.current)
+                .set(opt)
+                .outputPdf("bloburl")
+                .then((pdfUrl) => {
+                    if (printPage) {
+                        printPage.style.height = originalHeight || "";
+                    }
+                    window.open(pdfUrl, "_blank");
+                });
+        }, 2000);
+    }, []);
 
     /* =============================
        LOADING / SAFETY
@@ -129,9 +129,9 @@ export default function SummaryLayout() {
 
     const testTaken = summary.teststaken ?? review_test_taken;
 
-    if (!topValues.length || !topUnfulfilledValues.length || !testTaken) {
-        return <div className="p-6">No criteria data available</div>;
-    }
+    // if (!topValues.length || !topUnfulfilledValues.length || !testTaken) {
+    //     return <div className="p-6">No criteria data available</div>;
+    // }
 
     /* =============================
        PAGE 1 DATA
@@ -195,7 +195,7 @@ export default function SummaryLayout() {
                     pending={review_test_pending}
                     reviewLevel={review_level}
                     riskLevel={risk_level}
-                />
+                /> 
 
                 <div className="text-center mt-4 mb-12">
                     <h2 className="text-3xl font-medium">
@@ -293,7 +293,7 @@ export default function SummaryLayout() {
                 />
 
                 <div className="text-center mt-2 mb-6">
-                    <h2 className="text-2xl font-medium">Top 10 Criteria</h2>
+                    <h2 className="text-2xl font-medium uppercase">Top 10 Criteria</h2>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -317,8 +317,8 @@ export default function SummaryLayout() {
                 />
 
                 <div className="text-center mt-2 mb-6">
-                    <h2 className="text-2xl font-medium">
-                        Top 10 UNFULFILLED Criteria
+                    <h2 className="text-2xl font-medium uppercase">
+                        Other 10 UNFULFILLED Criteria
                     </h2>
                 </div>
 

@@ -11,7 +11,7 @@ export default function ReportHeader({
     riskLevel
 }) {
     return (
-        <div className="grid font-sans text-black uppercase">
+        <div className="grid font-sans text-black">
 
             {/* Row 1 */}
             <div className="grid grid-cols-12 items-center">
